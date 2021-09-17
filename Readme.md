@@ -1,4 +1,4 @@
-# Api Response Formatter
+# APIs Response Formatter
 
 APIs response များကို format တစ်ခုတည်းဖြစ်စေရန်ရည်ရွယ်ပြီးတည်ဆောက်သည်။
 
@@ -59,7 +59,7 @@ return [
 
 ``status code`` များကိုအသုံးပြုရာတွင် ``App\Http\HtmlStatusCode`` ဖြင့်အသုံးပြုရန် အကြံပေးသည်။
 
-_ထို class ထဲမှ တန်ဖိုးများကိုပြောင်းလဲခြင်းဖြင့်လည်း default သတ်မှတ်ထားသော response status code များပြောင်းလဲမည်။_
+<small>_ထို class ထဲမှ တန်ဖိုးများကိုပြောင်းလဲခြင်းဖြင့်လည်း default သတ်မှတ်ထားသော response status code များပြောင်းလဲမည်။_</small>
 
 ```php
 namespace App\Http;
