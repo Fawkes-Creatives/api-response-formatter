@@ -10,7 +10,6 @@ use ApiResponse\Formatter\Helpers\HtmlStatusCode;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Http\Resources\Json\ResourceCollection;
-use Spatie\Fractal\Fractal;
 use Illuminate\Support\Facades\Config;
 
 abstract class ResponseBuilder

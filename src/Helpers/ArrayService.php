@@ -14,6 +14,10 @@ class ArrayService
 
     public static function isMultiDimensional($array): bool
     {
+        if(!self::isArray($array)) {
+            return false;
+        }
+
         if (isset($array[0])) {
             return self::isArray($array[0]);
         }

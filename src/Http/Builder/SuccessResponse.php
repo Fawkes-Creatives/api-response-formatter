@@ -44,12 +44,12 @@ class SuccessResponse extends ResponseBuilder
             return $this->getData()->additional($this->getParameters());
         }
 
-        if ($this->getData() instanceof LengthAwarePaginator) {
-            return array_merge($this->getData()->toArray(), $this->getParameters());
+        if (get_class($this->getData()) == 'Spatie\Fractal\Fractal') {
+            return array_merge($this->getParameters(), $this->getData()->toArray());
         }
 
-        if ($this->getData() instanceof Fractal) {
-            return array_merge($this->getParameters(), $this->getData()->toArray());
+        if ($this->getData() instanceof LengthAwarePaginator) {
+            return array_merge($this->getData()->toArray(), $this->getParameters());
         }
 
         return array_merge($this->getParameters(), [
