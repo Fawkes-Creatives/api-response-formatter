@@ -36,15 +36,23 @@ class SuccessResponse extends ResponseBuilder
             return $this->getParameters();
         }
 
+        if (is_null($this->getData()) && $dataWrapping) {
+            return array_merge($this->getParameters(), [
+                'data' => $this->getData()
+            ]);
+        }
+
         if (!ArrayService::isMultiDimensional($this->getData()) && !$dataWrapping) {
             return array_merge($this->getParameters() ?: [], $this->getData());
         }
 
-        if ($this->getData() instanceof AnonymousResourceCollection || $this->getData() instanceof ResourceCollection) {
+        if ($this->getData() instanceof AnonymousResourceCollection ||
+            $this->getData() instanceof ResourceCollection) {
             return $this->getData()->additional($this->getParameters());
         }
 
-        if (get_class($this->getData()) == 'Spatie\Fractal\Fractal') {
+        if (!is_array($this->getData()) &&
+            get_class($this->getData()) == 'Spatie\Fractal\Fractal') {
             return array_merge($this->getParameters(), $this->getData()->toArray());
         }
 

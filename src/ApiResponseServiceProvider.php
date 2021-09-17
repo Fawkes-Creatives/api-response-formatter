@@ -22,7 +22,7 @@ class ApiResponseServiceProvider extends ServiceProvider
                 __DIR__ . '/config/api_response_format.php' => $this->app->configPath('api_response_format.php'),
             ]);
 
-            $this->registerStub();
+//            $this->registerStub();
         }
     }
 
