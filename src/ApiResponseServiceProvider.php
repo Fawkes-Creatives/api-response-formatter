@@ -22,7 +22,7 @@ class ApiResponseServiceProvider extends ServiceProvider
                 __DIR__ . '/config/api_response_format.php' => $this->app->configPath('api_response_format.php'),
             ]);
 
-//            $this->registerStub();
+            $this->registerStub();
         }
     }
 
@@ -42,6 +42,6 @@ class ApiResponseServiceProvider extends ServiceProvider
         }
         $stub = file_get_contents(__DIR__ . '/stubs/html-status-code.stub');
 
-        file_put_contents('app/Http/HtmlStatusCode.php', $stub);
+        file_put_contents(app_path('Http/HtmlStatusCode.php'), $stub);
     }
 }
