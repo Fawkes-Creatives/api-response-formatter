@@ -1,0 +1,57 @@
+{
+    "name": "fawkescreatives/api-response-formatter",
+    "description": "This package is for building the same format APIs responses in Laravel.",
+    "keywords": [
+        "laravel",
+        "api",
+        "response",
+        "format",
+        "api-response-format",
+        "api-response-formatter"
+    ],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Fawkes Creatives",
+            "email": "fawkescreatives@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "ApiResponse\\Formatter\\": "src/"
+        },
+        "files": [
+            "src/Helpers/helpers.php"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "ApiResponse\\Formatter\\Tests\\": "tests/"
+        }
+    },
+    "require": {
+        "php": "^7.0|^8.0",
+        "illuminate/support": "^5.1|^6.0|^7.0|^8.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.5",
+        "orchestra/testbench": "^6.21"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "ApiResponse\\Formatter\\ApiResponseServiceProvider"
+            ],
+            "aliases": {
+                "ApiResponse": "ApiResponse\\Formatter\\Facades\\ApiResponse"
+            }
+        }
+    },
+    "scripts": {
+        "post-autoload-dump": [
+            "@php ./vendor/bin/testbench package:discover --ansi"
+        ]
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
