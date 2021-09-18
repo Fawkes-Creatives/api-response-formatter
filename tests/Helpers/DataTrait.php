@@ -9,9 +9,26 @@ use Faker\Factory;
 
 trait DataTrait
 {
-    public function getConfig(): array
+    public function getResponseKeys(): array
     {
-        return config('api_response_format');
+        return array_filter(config('api_response_format'), function ($item) {
+            return is_bool($item);
+        });
+    }
+
+    public function getExpectedCount(): int
+    {
+        $output = count(
+            array_filter($this->getResponseKeys(), function ($value) {
+                return $value;
+            })
+        );
+
+        if ($this->getResponseKeys()['status']) {
+            $output += 1;
+        }
+
+        return $output;
     }
 
     public function getSingularArrayData($count = 5): array

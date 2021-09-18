@@ -17,7 +17,10 @@ class ErrorTest extends TestCase
     {
         $data = ApiResponse::error();
 
-        $this->assertCount(count($this->getConfig()), $data);
+        $this->assertCount(
+            $this->getExpectedCount(),
+            $data
+        );
     }
 
     /** @test */
@@ -28,7 +31,7 @@ class ErrorTest extends TestCase
             'status' => 404
         ]);
         $this->assertCount(
-            count($this->getConfig()) - 1,
+            $this->getExpectedCount(),
             $data
         );
         $this->assertArrayNotHasKey('status', $data);
@@ -40,7 +43,7 @@ class ErrorTest extends TestCase
         config()->set('api_response_format.status', true);
         $data = ApiResponse::error(404);
         $this->assertCount(
-            count($this->getConfig()),
+            $this->getExpectedCount(),
             $data
         );
         $this->assertArrayHasKey('status', $data);
@@ -53,7 +56,7 @@ class ErrorTest extends TestCase
         config()->set('api_response_format.success', false);
         $data = ApiResponse::error();
         $this->assertCount(
-            count($this->getConfig()) - 1,
+            $this->getExpectedCount(),
             $data
         );
         $this->assertArrayNotHasKey('success', $data);
@@ -65,7 +68,7 @@ class ErrorTest extends TestCase
         config()->set('api_response_format.success', true);
         $data = ApiResponse::error();
         $this->assertCount(
-            count($this->getConfig()),
+            $this->getExpectedCount(),
             $data
         );
         $this->assertArrayHasKey('success', $data);
@@ -78,7 +81,7 @@ class ErrorTest extends TestCase
         config()->set('api_response_format.message', false);
         $data = ApiResponse::error(400, 'I am string');
         $this->assertCount(
-            count($this->getConfig()) - 1,
+            $this->getExpectedCount(),
             $data
         );
         $this->assertArrayNotHasKey('message', $data);
@@ -90,7 +93,7 @@ class ErrorTest extends TestCase
         config()->set('api_response_format.message', true);
         $data = ApiResponse::error(400, 'I am string');
         $this->assertCount(
-            count($this->getConfig()),
+            $this->getExpectedCount(),
             $data
         );
         $this->assertArrayHasKey('message', $data);
@@ -108,7 +111,7 @@ class ErrorTest extends TestCase
         );
 
         $this->assertCount(
-            count($this->getConfig()),
+            $this->getExpectedCount(),
             $data
         );
         $this->assertArrayHasKey('data', $data);

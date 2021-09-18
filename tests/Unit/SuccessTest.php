@@ -18,7 +18,10 @@ class SuccessTest extends TestCase
     {
         $data = ApiResponse::success();
 
-        $this->assertCount(count($this->getConfig()), $data);
+        $this->assertCount(
+            $this->getExpectedCount(),
+            $data
+        );
     }
 
     /** @test */
@@ -29,10 +32,11 @@ class SuccessTest extends TestCase
             'status' => 404
         ]);
         $this->assertCount(
-            count($this->getConfig()) - 1,
+            $this->getExpectedCount(),
             $data
         );
         $this->assertArrayNotHasKey('status', $data);
+        $this->assertArrayNotHasKey('status_ref', $data);
     }
 
     /** @test */
@@ -43,7 +47,7 @@ class SuccessTest extends TestCase
             'status' => 404
         ]);
         $this->assertCount(
-            count($this->getConfig()),
+            $this->getExpectedCount(),
             $data
         );
         $this->assertArrayHasKey('status', $data);
@@ -58,7 +62,7 @@ class SuccessTest extends TestCase
             'success' => true
         ]);
         $this->assertCount(
-            count($this->getConfig()) - 1,
+            $this->getExpectedCount(),
             $data
         );
         $this->assertArrayNotHasKey('success', $data);
@@ -72,7 +76,7 @@ class SuccessTest extends TestCase
             'success' => false
         ]);
         $this->assertCount(
-            count($this->getConfig()),
+            $this->getExpectedCount(),
             $data
         );
         $this->assertArrayHasKey('success', $data);
@@ -87,7 +91,7 @@ class SuccessTest extends TestCase
             'message' => 'I am string'
         ]);
         $this->assertCount(
-            count($this->getConfig()) - 1,
+            $this->getExpectedCount(),
             $data
         );
         $this->assertArrayNotHasKey('message', $data);
@@ -101,7 +105,7 @@ class SuccessTest extends TestCase
             'message' => 'I am string'
         ]);
         $this->assertCount(
-            count($this->getConfig()),
+            $this->getExpectedCount(),
             $data
         );
         $this->assertArrayHasKey('message', $data);
@@ -114,7 +118,7 @@ class SuccessTest extends TestCase
         config()->set('api_response_format.always_data_wrapping', false);
         $data = ApiResponse::success();
         $this->assertCount(
-            count($this->getConfig()) - 1,
+            $this->getExpectedCount(),
             $data
         );
         $this->assertArrayNotHasKey('data', $data);
@@ -126,7 +130,7 @@ class SuccessTest extends TestCase
         config()->set('api_response_format.always_data_wrapping', true);
         $data = ApiResponse::success();
         $this->assertCount(
-            count($this->getConfig()),
+            $this->getExpectedCount(),
             $data
         );
         $this->assertArrayHasKey('data', $data);
@@ -142,7 +146,7 @@ class SuccessTest extends TestCase
         );
 
         $this->assertCount(
-            count($this->getConfig()),
+            $this->getExpectedCount(),
             $data
         );
         $this->assertArrayHasKey('data', $data);
