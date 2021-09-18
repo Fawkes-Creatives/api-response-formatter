@@ -114,6 +114,9 @@ class HttpStatusCode
     const UNSUPPORTED_MEDIA_TYPE = 415;
     const UNSUPPORTED_MEDIA_TYPE_REF = 'Unsupported Media Type';
 
+    const UNPROCESSABLE_ENTITY = 422;
+    const UNPROCESSABLE_ENTITY_REF = 'Unprocessable Entity';
+
     const UPGRADE_REQUIRED = 426;
     const UPGRADE_REQUIRED_REF = 'Upgrade Required';
 
