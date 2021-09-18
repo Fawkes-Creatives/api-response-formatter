@@ -5,8 +5,13 @@
 
 namespace ApiResponse\Formatter\Http\Builder;
 
+use ReflectionException;
+
 class ErrorResponse extends ResponseBuilder
 {
+    /**
+     * @throws ReflectionException
+     */
     function build($data = null, ...$parameters)
     {
         return $this->setData($data)
@@ -14,10 +19,18 @@ class ErrorResponse extends ResponseBuilder
                     ->render();
     }
 
+    /**
+     * @return array
+     */
     protected function render()
     {
-        return array_merge($this->getParameters(), [
-            'data' => $this->getData()
-        ]);
+        $output = $this->getParameters();
+        if ($this->isWrappingData()) {
+            $output = array_merge($output, [
+                'data' => $this->getData()
+            ]);
+        }
+
+        return $output;
     }
 }

@@ -37,11 +37,12 @@ class ApiResponseServiceProvider extends ServiceProvider
 
     public function registerStub()
     {
-        if (file_exists(app_path('Http/HtmlStatusCode.php'))) {
+        if (file_exists(app_path('Http/HttpStatusCode.php'))) {
             return;
         }
-        $stub = file_get_contents(__DIR__ . '/stubs/html-status-code.stub');
 
-        file_put_contents(app_path('Http/HtmlStatusCode.php'), $stub);
+        $stub = file_get_contents(__DIR__ . '/stubs/http-status-code.stub');
+
+        file_put_contents(app_path('Http/HttpStatusCode.php'), $stub);
     }
 }

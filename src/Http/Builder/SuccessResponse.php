@@ -10,6 +10,7 @@ use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Http\Resources\Json\ResourceCollection;
+use ReflectionException;
 
 class SuccessResponse extends ResponseBuilder
 {
@@ -17,6 +18,7 @@ class SuccessResponse extends ResponseBuilder
      * @param null $data
      * @param mixed ...$parameters
      * @return array|array[]|LengthAwarePaginator[]|null[]
+     * @throws ReflectionException
      */
     function build($data = null, ...$parameters)
     {
@@ -26,11 +28,11 @@ class SuccessResponse extends ResponseBuilder
     }
 
     /**
-     * @return array|array[]|LengthAwarePaginator[]|Arrayable[]|null[]|ResourceCollection
+     * @return array|array[]|LengthAwarePaginator[]|Arrayable[]|ResourceCollection
      */
     protected function render()
     {
-        $dataWrapping = in_array(self::__DATA_WRAPPING, $this->getEnabledKeys());
+        $dataWrapping = $this->isWrappingData();
 
         if (is_null($this->getData()) && !$dataWrapping) {
             return $this->getParameters();

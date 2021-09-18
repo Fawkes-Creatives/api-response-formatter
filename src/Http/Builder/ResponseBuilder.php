@@ -6,11 +6,11 @@
 namespace ApiResponse\Formatter\Http\Builder;
 
 use ApiResponse\Formatter\Helpers\ArrayService;
-use ApiResponse\Formatter\Helpers\HtmlStatusCode;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 use Illuminate\Support\Facades\Config;
+use ReflectionException;
 
 abstract class ResponseBuilder
 {
@@ -19,12 +19,20 @@ abstract class ResponseBuilder
     const  __STATUS = 'status';
     const __DATA_WRAPPING = 'always_data_wrapping';
 
+    /**
+     * @var array
+     */
     protected $parameters = [];
 
     /**
      * @var int
      */
     protected $status;
+
+    /**
+     * @var string
+     */
+    protected $status_ref;
 
     /**
      * @var string
@@ -36,9 +44,10 @@ abstract class ResponseBuilder
      */
     protected $success;
 
+    /**
+     * @var array|null
+     */
     protected $data;
-
-    protected $htmlStatusClassFromRoot = 'App\Http\HtmlStatusCode';
 
     /**
      * @param null $data
@@ -69,26 +78,24 @@ abstract class ResponseBuilder
         return $output;
     }
 
-    /**
-     * @return HtmlStatusCode|mixed
-     */
-    protected function getHtmlStatusCode()
+    protected function isWrappingData(): bool
     {
-        if (class_exists($this->htmlStatusClassFromRoot)) {
-            return new $this->htmlStatusClassFromRoot;
-        }
-
-        return new HtmlStatusCode();
+        return in_array(self::__DATA_WRAPPING, $this->getEnabledKeys());
     }
 
+    /**
+     * set default to status, ref, success, message
+     */
     protected function setDefaultParametersValue()
     {
         if ($this instanceof SuccessResponse) {
-            $this->status = $this->getHtmlStatusCode()::SUCCESS;
+            $this->status = getSuccessHttpStatusCode();
+            $this->status_ref = getSuccessHttpStatusRef();
             $this->success = true;
             $this->message = 'success';
         } elseif ($this instanceof ErrorResponse) {
-            $this->status = $this->getHtmlStatusCode()::BAD_REQUEST;
+            $this->status = getErrorHttpStatusCode();
+            $this->status_ref = getErrorHttpStatusRef();
             $this->success = false;
             $this->message = 'error';
         }
@@ -97,6 +104,7 @@ abstract class ResponseBuilder
     /**
      * @param ...$parameters
      * @return $this
+     * @throws ReflectionException
      */
     protected function setParameters(...$parameters): self
     {
@@ -104,9 +112,12 @@ abstract class ResponseBuilder
 
         foreach ($this->getEnabledKeys() as $key) {
             $parameter = ArrayService::get($parameters, '0', []);
+
             if ($key === self::__STATUS) {
+                $statusCode = ArrayService::get($parameter, self::__STATUS, $this->status);
                 $this->parameters = array_merge($this->parameters, [
-                    $key => ArrayService::get($parameter, self::__STATUS, $this->status)
+                    $key          => $statusCode,
+                    $key . '_ref' => getStatusRef($statusCode)
                 ]);
             }
             if ($key === self::__SUCCESS) {
