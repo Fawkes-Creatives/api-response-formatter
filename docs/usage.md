@@ -41,6 +41,7 @@ public function index()
 ```json
 {
     "status": 200,
+    "status_ref": "Ok",
     "success": true,
     "message": "success",
     "data": null
@@ -63,6 +64,7 @@ public function index()
 ```json
 {
     "status": 200,
+    "status_ref":"Ok",
     "success": true,
     "message": "success",
     "data": [...],
@@ -89,6 +91,7 @@ public function index()
     "links": {...},
     "meta": {...},
     "status": 200,
+    "status_ref": "Ok",
     "success": true,
     "message": "success"
 }
@@ -106,10 +109,11 @@ public function index()
 ```
 ```json
 {
-      "status": 400,
-      "success": false,
-      "message": "error",
-      "data": null
+    "status": 400,
+    "status_ref": "Bad Request",
+    "success": false,
+    "message": "error",
+    "data": null
 }
 ```
 
@@ -121,25 +125,26 @@ use App\Http\HttpStatusCode;
 public function index()
 { 
     return ApiResponse::error(
-        HttpStatusCode::UNAUTHORIZED,
+        HttpStatusCode::FORBIDDEN,
         "You don't have permit.",
         [
             'ip'     => '192.168.x.x',
             'time'   => '2021-09-17 16:45:07 UTC ',
-            'detail' => 'To further protect your account, consider configuring a two-factor authentication method.'
+            'detail' => 'The REST API Key you are using does not have sufficient permissions.'
         ]
     );
 }
 ```
 ```json
 {
-      "status": 401,
-      "success": false,
-      "message": "You don't have permit.",
-      "data": {
+    "status": 401,
+    "status_ref": "Forbidden",
+    "success": false,
+    "message": "You don't have permit.",
+    "data": {
         "ip": "192.168.x.x",
         "time": "2021-09-17 16:45:07 UTC ",
-        "detail": "To further protect your account, consider configuring a two-factor authentication method."
-      }
+        "detail": "The REST API Key you are using does not have sufficient permissions."
+    }
 }
 ```

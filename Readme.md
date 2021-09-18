@@ -39,6 +39,8 @@ php artisan vendor:publish --provider="ApiResponse\Formatter\ApiResponseServiceP
 
 ``config/api_response_format.php`` မှ boolean value များကိုပြင်ဆင်ခြင်းဖြင့် response ကိုပြောင်းလဲနိုင်သည်။
 
+``http status code class`` နှင့် ``default response values များကိုမိမိလိုအပ်သလိုပြုလုပ်နိုင်သည်။ 
+
 eg..,
 ```php
 . api_response_format.php
@@ -48,18 +50,28 @@ return [
     'success'              => false, // boolean
     'message'              => false, // boolean
     'always_data_wrapping' => true, // boolean
+    
+    // default response values
+    'http_status_code_class' => ApiResponse\Formatter\Helpers\HttpStatusCode::class,
+    'default_success_status' => [
+        'status'     => ApiResponse\Formatter\Helpers\HttpStatusCode::SUCCESS,
+        'status_ref' => ApiResponse\Formatter\Helpers\HttpStatusCode::SUCCESS_REF
+    ],
+    'default_error_status'   => [
+        'status'     => ApiResponse\Formatter\Helpers\HttpStatusCode::BAD_REQUEST,
+        'status_ref' => ApiResponse\Formatter\Helpers\HttpStatusCode::BAD_REQUEST_REF
+    ]
 ];
 
 . output
 {
     "status": 200,
+    "status_ref": "Ok"
     "data": null
 }
 ```
 
-``status code`` များကိုအသုံးပြုရာတွင် ``App\Http\HttpStatusCode`` ဖြင့်အသုံးပြုရန် အကြံပေးသည်။
-
-<small>_ထို class ထဲမှ တန်ဖိုးများကိုပြောင်းလဲခြင်းဖြင့်လည်း default သတ်မှတ်ထားသော response status code များပြောင်းလဲမည်။_</small>
+``status code`` များကိုအသုံးပြုရာတွင် ``App\Http\HttpStatusCode`` ဖြင့်အသုံးပြုရန် အကြံပြုသည်။
 
 ```php
 namespace App\Http;
@@ -78,7 +90,7 @@ class HttpStatusCode
      * Success code
      */
 
-    const SUCCESS = 200; // default success response
+    const SUCCESS = 200;
     const CREATED = 201;
     const ACCEPTED = 202;
 
@@ -86,7 +98,7 @@ class HttpStatusCode
      * Client error code
      */
 
-    const BAD_REQUEST = 400; // default error response
+    const BAD_REQUEST = 400;
     const UNAUTHORIZED = 401;
     const NOT_FOUND = 404;
 }
