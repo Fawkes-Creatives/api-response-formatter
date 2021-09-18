@@ -116,12 +116,12 @@ public function index()
 ``Sample 2: With info``
 ```php
 use ApiResponse\Formatter\Facades\ApiResponse;
-use App\Http\HtmlStatusCode;
+use App\Http\HttpStatusCode;
 
 public function index()
 { 
     return ApiResponse::error(
-        HtmlStatusCode::UNAUTHORIZED,
+        HttpStatusCode::UNAUTHORIZED,
         "You don't have permit.",
         [
             'ip'     => '192.168.x.x',

@@ -57,7 +57,7 @@ return [
 }
 ```
 
-``status code`` များကိုအသုံးပြုရာတွင် ``App\Http\HtmlStatusCode`` ဖြင့်အသုံးပြုရန် အကြံပေးသည်။
+``status code`` များကိုအသုံးပြုရာတွင် ``App\Http\HttpStatusCode`` ဖြင့်အသုံးပြုရန် အကြံပေးသည်။
 
 <small>_ထို class ထဲမှ တန်ဖိုးများကိုပြောင်းလဲခြင်းဖြင့်လည်း default သတ်မှတ်ထားသော response status code များပြောင်းလဲမည်။_</small>
 
@@ -65,7 +65,7 @@ return [
 namespace App\Http;
 
 
-class HtmlStatusCode
+class HttpStatusCode
 {
      /**
      * Information code
