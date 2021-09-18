@@ -24,13 +24,6 @@ class ErrorResponse extends ResponseBuilder
      */
     protected function render()
     {
-        $output = $this->getParameters();
-        if ($this->isWrappingData()) {
-            $output = array_merge($output, [
-                'data' => $this->getData()
-            ]);
-        }
-
-        return $output;
+        return $this->response();
     }
 }

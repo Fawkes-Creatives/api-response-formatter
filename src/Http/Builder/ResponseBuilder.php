@@ -7,7 +7,9 @@ namespace ApiResponse\Formatter\Http\Builder;
 
 use ApiResponse\Formatter\Helpers\ArrayService;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Contracts\Support\Arrayable;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 use Illuminate\Support\Facades\Config;
 use ReflectionException;
@@ -166,9 +168,39 @@ abstract class ResponseBuilder
         if ($this->data instanceof Arrayable &&
             !$this->data instanceof LengthAwarePaginator
         ) {
-            $this->data = $this->data->toArray();
+            return $this->data->toArray();
+        }
+
+        if ($this->data instanceof ResourceCollection || $this->data instanceof AnonymousResourceCollection) {
+            return $this->data->response()->getData(true);
+        }
+
+        if (!is_array($this->data)) {
+            return $this->data->toArray();
         }
 
         return $this->data;
+    }
+
+    protected function responseData(): array
+    {
+        if (!$this->isWrappingData()) {
+            return $this->getData() ?: [];
+        }
+
+        if (ArrayService::isArray($this->getData()) && array_key_exists('data', $this->getData())) {
+            return $this->getData();
+        }
+
+        return [
+            'data' => $this->getData()
+        ];
+    }
+
+    protected function response()
+    {
+        return app(ResponseFactory::class)->json(
+            array_merge($this->getParameters(), $this->responseData())
+        );
     }
 }

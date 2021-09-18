@@ -14,9 +14,9 @@ class SuccessTest extends TestCase
     use DataTrait;
 
     /** @test */
-    public function it_only_call()
+    public function it_only_call_success()
     {
-        $data = ApiResponse::success();
+        $data = ApiResponse::success()->getData(true);
 
         $this->assertCount(
             $this->getExpectedCount(),
@@ -25,12 +25,12 @@ class SuccessTest extends TestCase
     }
 
     /** @test */
-    public function its_status_value_is_false()
+    public function its_status_value_is_false_success()
     {
         config()->set('api_response_format.status', false);
         $data = ApiResponse::success(null, [
             'status' => 404
-        ]);
+        ])->getData(true);
         $this->assertCount(
             $this->getExpectedCount(),
             $data
@@ -40,12 +40,12 @@ class SuccessTest extends TestCase
     }
 
     /** @test */
-    public function its_status_value_is_true()
+    public function its_status_value_is_true_success()
     {
         config()->set('api_response_format.status', true);
         $data = ApiResponse::success(null, [
             'status' => 404
-        ]);
+        ])->getData(true);
         $this->assertCount(
             $this->getExpectedCount(),
             $data
@@ -55,12 +55,12 @@ class SuccessTest extends TestCase
     }
 
     /** @test */
-    public function its_success_value_is_false()
+    public function its_success_value_is_false_success()
     {
         config()->set('api_response_format.success', false);
         $data = ApiResponse::success(null, [
             'success' => true
-        ]);
+        ])->getData(true);
         $this->assertCount(
             $this->getExpectedCount(),
             $data
@@ -69,12 +69,12 @@ class SuccessTest extends TestCase
     }
 
     /** @test */
-    public function its_success_value_is_true()
+    public function its_success_value_is_true_success()
     {
         config()->set('api_response_format.success', true);
         $data = ApiResponse::success(null, [
             'success' => false
-        ]);
+        ])->getData(true);
         $this->assertCount(
             $this->getExpectedCount(),
             $data
@@ -84,12 +84,12 @@ class SuccessTest extends TestCase
     }
 
     /** @test */
-    public function its_message_value_is_false()
+    public function its_message_value_is_false_success()
     {
         config()->set('api_response_format.message', false);
         $data = ApiResponse::success(null, [
             'message' => 'I am string'
-        ]);
+        ])->getData(true);
         $this->assertCount(
             $this->getExpectedCount(),
             $data
@@ -98,12 +98,12 @@ class SuccessTest extends TestCase
     }
 
     /** @test */
-    public function its_message_value_is_true()
+    public function its_message_value_is_true_success()
     {
         config()->set('api_response_format.message', true);
         $data = ApiResponse::success(null, [
             'message' => 'I am string'
-        ]);
+        ])->getData(true);
         $this->assertCount(
             $this->getExpectedCount(),
             $data
@@ -113,10 +113,10 @@ class SuccessTest extends TestCase
     }
 
     /** @test */
-    public function its_always_data_wrapping_value_is_false()
+    public function its_always_data_wrapping_value_is_false_success()
     {
         config()->set('api_response_format.always_data_wrapping', false);
-        $data = ApiResponse::success();
+        $data = ApiResponse::success()->getData(true);
         $this->assertCount(
             $this->getExpectedCount(),
             $data
@@ -125,10 +125,10 @@ class SuccessTest extends TestCase
     }
 
     /** @test */
-    public function its_always_data_wrapping_value_is_true()
+    public function its_always_data_wrapping_value_is_true_success()
     {
         config()->set('api_response_format.always_data_wrapping', true);
-        $data = ApiResponse::success();
+        $data = ApiResponse::success()->getData(true);
         $this->assertCount(
             $this->getExpectedCount(),
             $data
@@ -138,12 +138,12 @@ class SuccessTest extends TestCase
     }
 
     /** @test */
-    public function it_sending_data_to_it()
+    public function it_sending_data_to_it_success()
     {
         $count = 4;
         $data = ApiResponse::success(
             $this->getMultidimensionalArrayData($count)
-        );
+        )->getData(true);
 
         $this->assertCount(
             $this->getExpectedCount(),
