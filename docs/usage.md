@@ -30,12 +30,17 @@ public function index(ResponseService $response)
 
 ### Success Response
 ``Sample 1: Empty data``
+
 ```php
 use ApiResponse\Formatter\Facades\ApiResponse;
+use App\Http\HttpStatusCode;
 
 public function index()
 {
-    return ApiResponse::success();
+    return ApiResponse::success(null, [
+        'status' => HttpStatusCode::SUCCESS,
+        'message' => 'success'
+    ]);
 }
 ```
 ```json
