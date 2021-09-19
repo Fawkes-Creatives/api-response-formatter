@@ -127,7 +127,7 @@ abstract class ResponseBuilder
             }
             if ($key === self::__SUCCESS) {
                 $this->parameters = array_merge($this->parameters, [
-                    $key => ArrayService::get($parameter, self::__SUCCESS, $this->success)
+                    $key => $this->success
                 ]);
             }
             if ($key === self::__MESSAGE) {
