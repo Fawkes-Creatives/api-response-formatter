@@ -80,7 +80,7 @@ class SuccessTest extends TestCase
             $data
         );
         $this->assertArrayHasKey('success', $data);
-        $this->assertEquals(false, $data['success']);
+        $this->assertNotEquals(false, $data['success']);
     }
 
     /** @test */
