@@ -81,6 +81,13 @@ abstract class ResponseBuilder
 //        return in_array(self::__DATA_WRAPPING, $this->getEnabledKeys());
     }
 
+    private function isArrayDefaultDataKeyType(): bool
+    {
+        return ArrayService::isArray(
+            Config::get('api_response_format.data_key_default_type')
+        );
+    }
+
     /**
      * set default to status, ref, success, message
      */
@@ -178,25 +185,28 @@ abstract class ResponseBuilder
         return $this->data;
     }
 
-    protected function responseData(): array
+    protected function formattedData(): array
     {
-        if (!$this->isWrappingData()) {
-            return $this->getData() ?: [];
+        $data = $this->getData();
+        if ($this->isArrayDefaultDataKeyType() && is_null($data)) {
+            $data = array();
         }
 
-        if (ArrayService::isArray($this->getData()) && array_key_exists('data', $this->getData())) {
-            return $this->getData();
+        if (ArrayService::isArray($data) &&
+            array_key_exists('data', $data)
+        ) {
+            return $data;
         }
 
         return [
-            'data' => $this->getData()
+            'data' => $data
         ];
     }
 
     protected function response()
     {
         return app(ResponseFactory::class)->json(
-            array_merge($this->getParameters(), $this->responseData())
+            array_merge($this->getParameters(), $this->formattedData())
         );
     }
 }

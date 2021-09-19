@@ -15,11 +15,12 @@
 */
 
 return [
-    'status'               => true, // boolean
-    'success'              => true, // boolean
-    'message'              => true, // boolean
+    'status'                 => true, // boolean
+    'success'                => true, // boolean
+    'message'                => true, // boolean
 
     // default response values
+    'data_key_default_type'  => null, // null || array() // data key ရဲ့ default value type အတွက်
     'http_status_code_class' => ApiResponse\Formatter\Http\HttpStatusCode::class,
     'default_success_status' => [
         'status'     => ApiResponse\Formatter\Http\HttpStatusCode::SUCCESS,
