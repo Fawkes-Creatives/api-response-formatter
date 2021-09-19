@@ -28,7 +28,7 @@ trait DataTrait
             $output += 1;
         }
 
-        return $output;
+        return $output + 1;
     }
 
     public function getSingularArrayData($count = 5): array

@@ -113,31 +113,6 @@ class SuccessTest extends TestCase
     }
 
     /** @test */
-    public function its_always_data_wrapping_value_is_false_success()
-    {
-        config()->set('api_response_format.always_data_wrapping', false);
-        $data = ApiResponse::success()->getData(true);
-        $this->assertCount(
-            $this->getExpectedCount(),
-            $data
-        );
-        $this->assertArrayNotHasKey('data', $data);
-    }
-
-    /** @test */
-    public function its_always_data_wrapping_value_is_true_success()
-    {
-        config()->set('api_response_format.always_data_wrapping', true);
-        $data = ApiResponse::success()->getData(true);
-        $this->assertCount(
-            $this->getExpectedCount(),
-            $data
-        );
-        $this->assertArrayHasKey('data', $data);
-        $this->assertNull($data['data']);
-    }
-
-    /** @test */
     public function it_sending_data_to_it_success()
     {
         $count = 4;
