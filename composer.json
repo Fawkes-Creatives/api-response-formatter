@@ -30,7 +30,7 @@
         }
     },
     "require": {
-        "php": "^7.0|^8.0",
+        "php": "^7.1|^8.0",
         "illuminate/support": "^5.1|^6.0|^7.0|^8.0"
     },
     "require-dev": {
@@ -48,6 +48,7 @@
         }
     },
     "scripts": {
+        "test": "vendor/bin/phpunit tests/ --colors --testdox",
         "post-autoload-dump": [
             "@php ./vendor/bin/testbench package:discover --ansi"
         ]
