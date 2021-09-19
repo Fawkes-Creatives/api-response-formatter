@@ -21,13 +21,13 @@ return [
     'always_data_wrapping' => true, // boolean | ဘယ်လိုအခြေအနေမျိုးမှာပဲဖြစ်ဖြစ် data ဆိုတဲ့ keyword နဲ့ wrap လုပ်ထားချင်ရင်
 
     // default response values
-    'http_status_code_class' => ApiResponse\Formatter\Helpers\HttpStatusCode::class,
+    'http_status_code_class' => ApiResponse\Formatter\Http\HttpStatusCode::class,
     'default_success_status' => [
-        'status'     => ApiResponse\Formatter\Helpers\HttpStatusCode::SUCCESS,
-        'status_ref' => ApiResponse\Formatter\Helpers\HttpStatusCode::SUCCESS_REF
+        'status'     => ApiResponse\Formatter\Http\HttpStatusCode::SUCCESS,
+        'status_ref' => ApiResponse\Formatter\Http\HttpStatusCode::SUCCESS_REF
     ],
     'default_error_status'   => [
-        'status'     => ApiResponse\Formatter\Helpers\HttpStatusCode::BAD_REQUEST,
-        'status_ref' => ApiResponse\Formatter\Helpers\HttpStatusCode::BAD_REQUEST_REF
+        'status'     => ApiResponse\Formatter\Http\HttpStatusCode::BAD_REQUEST,
+        'status_ref' => ApiResponse\Formatter\Http\HttpStatusCode::BAD_REQUEST_REF
     ]
 ];

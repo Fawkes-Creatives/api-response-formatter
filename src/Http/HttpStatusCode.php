@@ -4,7 +4,7 @@
  * @reference https://developer.mozilla.org/en-US/docs/Web/HTTP/Status
  */
 
-namespace ApiResponse\Formatter\Helpers;
+namespace ApiResponse\Formatter\Http;
 
 class HttpStatusCode
 {
