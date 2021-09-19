@@ -18,7 +18,6 @@ return [
     'status'               => true, // boolean
     'success'              => true, // boolean
     'message'              => true, // boolean
-    'always_data_wrapping' => true, // boolean | ဘယ်လိုအခြေအနေမျိုးမှာပဲဖြစ်ဖြစ် data ဆိုတဲ့ keyword နဲ့ wrap လုပ်ထားချင်ရင်
 
     // default response values
     'http_status_code_class' => ApiResponse\Formatter\Http\HttpStatusCode::class,

@@ -82,7 +82,8 @@ abstract class ResponseBuilder
 
     protected function isWrappingData(): bool
     {
-        return in_array(self::__DATA_WRAPPING, $this->getEnabledKeys());
+        return true;
+//        return in_array(self::__DATA_WRAPPING, $this->getEnabledKeys());
     }
 
     /**
