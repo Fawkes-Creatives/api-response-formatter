@@ -120,6 +120,7 @@ abstract class ResponseBuilder
 
             if ($key === self::__STATUS) {
                 $statusCode = ArrayService::get($parameter, self::__STATUS, $this->status);
+                $this->status = $statusCode;
                 $this->parameters = array_merge($this->parameters, [
                     $key          => $statusCode,
                     $key . '_ref' => getStatusRef($statusCode)
@@ -206,7 +207,8 @@ abstract class ResponseBuilder
     protected function response()
     {
         return app(ResponseFactory::class)->json(
-            array_merge($this->getParameters(), $this->formattedData())
+            array_merge($this->getParameters(), $this->formattedData()),
+            $this->status
         );
     }
 }
