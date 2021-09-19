@@ -8,6 +8,7 @@ namespace ApiResponse\Formatter\Tests\Unit;
 use ApiResponse\Formatter\Facades\ApiResponse;
 use ApiResponse\Formatter\Tests\Helpers\DataTrait;
 use ApiResponse\Formatter\Tests\TestCase;
+use ApiResponse\Formatter\Http\HttpStatusCode;
 
 class SuccessTest extends TestCase
 {
@@ -29,7 +30,7 @@ class SuccessTest extends TestCase
     {
         config()->set('api_response_format.status', false);
         $data = ApiResponse::success(null, [
-            'status' => 404
+            'status' => HttpStatusCode::ACCEPTED
         ])->getData(true);
         $this->assertCount(
             $this->getExpectedCount(),
@@ -44,14 +45,14 @@ class SuccessTest extends TestCase
     {
         config()->set('api_response_format.status', true);
         $data = ApiResponse::success(null, [
-            'status' => 404
+            'status' => HttpStatusCode::NO_CONTENT
         ])->getData(true);
         $this->assertCount(
             $this->getExpectedCount(),
             $data
         );
         $this->assertArrayHasKey('status', $data);
-        $this->assertEquals(404, $data['status']);
+        $this->assertEquals(HttpStatusCode::NO_CONTENT, $data['status']);
     }
 
     /** @test */

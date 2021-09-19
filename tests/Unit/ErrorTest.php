@@ -8,6 +8,7 @@ namespace ApiResponse\Formatter\Tests\Unit;
 use ApiResponse\Formatter\Facades\ApiResponse;
 use ApiResponse\Formatter\Tests\Helpers\DataTrait;
 use ApiResponse\Formatter\Tests\TestCase;
+use ApiResponse\Formatter\Http\HttpStatusCode;
 
 class ErrorTest extends TestCase
 {
@@ -29,7 +30,7 @@ class ErrorTest extends TestCase
     {
         config()->set('api_response_format.status', false);
         $data = ApiResponse::error(null, [
-            'status' => 404
+            'status' => HttpStatusCode::NOT_FOUND
         ])->getData(true);
         $this->assertCount(
             $this->getExpectedCount(),
@@ -42,13 +43,13 @@ class ErrorTest extends TestCase
     public function its_status_value_is_true_error()
     {
         config()->set('api_response_format.status', true);
-        $data = ApiResponse::error(404)->getData(true);
+        $data = ApiResponse::error(HttpStatusCode::NOT_FOUND)->getData(true);
         $this->assertCount(
             $this->getExpectedCount(),
             $data
         );
         $this->assertArrayHasKey('status', $data);
-        $this->assertEquals(404, $data['status']);
+        $this->assertEquals(HttpStatusCode::NOT_FOUND, $data['status']);
     }
 
     /** @test */
@@ -80,7 +81,7 @@ class ErrorTest extends TestCase
     public function its_message_value_is_false_error()
     {
         config()->set('api_response_format.message', false);
-        $data = ApiResponse::error(400, 'I am string')->getData(true);
+        $data = ApiResponse::error(HttpStatusCode::BAD_REQUEST, 'I am string')->getData(true);
         $this->assertCount(
             $this->getExpectedCount(),
             $data
@@ -92,7 +93,7 @@ class ErrorTest extends TestCase
     public function its_message_value_is_true_error()
     {
         config()->set('api_response_format.message', true);
-        $data = ApiResponse::error(400, 'I am string')->getData(true);
+        $data = ApiResponse::error(HttpStatusCode::BAD_REQUEST, 'I am string')->getData(true);
         $this->assertCount(
             $this->getExpectedCount(),
             $data
@@ -106,7 +107,7 @@ class ErrorTest extends TestCase
     {
         $count = 4;
         $data = ApiResponse::error(
-            400,
+            HttpStatusCode::BAD_REQUEST,
             'I am string',
             $this->getSingularArrayData(4)
         )->getData(true);
