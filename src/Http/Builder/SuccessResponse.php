@@ -6,8 +6,6 @@
 namespace ApiResponse\Formatter\Http\Builder;
 
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
-use Illuminate\Contracts\Support\Arrayable;
-use Illuminate\Http\Resources\Json\ResourceCollection;
 use ReflectionException;
 
 class SuccessResponse extends ResponseBuilder
@@ -22,14 +20,6 @@ class SuccessResponse extends ResponseBuilder
     {
         return $this->setData($data)
                     ->setParameters(...$parameters)
-                    ->render();
-    }
-
-    /**
-     * @return array|array[]|LengthAwarePaginator[]|Arrayable[]|ResourceCollection
-     */
-    protected function render()
-    {
-        return $this->response();
+                    ->response();
     }
 }

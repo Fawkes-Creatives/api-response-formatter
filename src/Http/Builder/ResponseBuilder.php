@@ -59,11 +59,6 @@ abstract class ResponseBuilder
     abstract function build($data = null, ...$parameters);
 
     /**
-     * @return array|ResourceCollection
-     */
-    abstract protected function render();
-
-    /**
      * @return array
      */
     protected function getEnabledKeys(): array

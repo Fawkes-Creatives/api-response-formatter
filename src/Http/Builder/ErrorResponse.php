@@ -16,14 +16,6 @@ class ErrorResponse extends ResponseBuilder
     {
         return $this->setData($data)
                     ->setParameters(...$parameters)
-                    ->render();
-    }
-
-    /**
-     * @return array
-     */
-    protected function render()
-    {
-        return $this->response();
+                    ->response();
     }
 }
