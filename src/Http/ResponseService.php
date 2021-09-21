@@ -9,9 +9,12 @@ use ApiResponse\Formatter\Contracts\ResponseContract;
 use ApiResponse\Formatter\Http\Builder\SuccessResponse;
 use ApiResponse\Formatter\Http\Builder\ErrorResponse;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Traits\Macroable;
 
 class ResponseService implements ResponseContract
 {
+    use Macroable;
+
     /**
      * @var SuccessResponse
      */
