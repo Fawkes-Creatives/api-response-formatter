@@ -3,7 +3,7 @@
  * @author fawkescreatives created on 15/09/2021
  */
 
-namespace ApiResponse\Formatter\Http\Builder;
+namespace LaravelIntuition\Http\Builder;
 
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use ReflectionException;

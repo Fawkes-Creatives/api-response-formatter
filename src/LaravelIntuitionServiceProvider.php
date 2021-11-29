@@ -3,14 +3,14 @@
  * @author fawkescreatives created on 15/09/2021
  */
 
-namespace ApiResponse\Formatter;
+namespace LaravelIntuition;
 
-use ApiResponse\Formatter\Http\ResponseService;
+use LaravelIntuition\Http\ResponseService;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Support\ServiceProvider;
-use ApiResponse\Formatter\Contracts\ResponseContract;
+use LaravelIntuition\Contracts\ResponseContract;
 
-class ApiResponseServiceProvider extends ServiceProvider
+class LaravelIntuitionServiceProvider extends ServiceProvider
 {
     /* @var Application */
     protected $app;
@@ -19,7 +19,7 @@ class ApiResponseServiceProvider extends ServiceProvider
     {
         if ($this->app->runningInConsole()) {
             $this->publishes([
-                __DIR__ . '/config/api_response_format.php' => $this->app->configPath('api_response_format.php'),
+                __DIR__ . '/config/intuition.php' => $this->app->configPath('intuition.php'),
             ]);
 
             $this->registerStub();
@@ -28,7 +28,7 @@ class ApiResponseServiceProvider extends ServiceProvider
 
     public function register()
     {
-        $this->mergeConfigFrom(__DIR__ . '/config/api_response_format.php', 'api_response_format');
+        $this->mergeConfigFrom(__DIR__ . '/config/intuition.php', 'intuition');
 
         $this->app->bind(ResponseContract::class, function ($app) {
             return $app->make(ResponseService::class);

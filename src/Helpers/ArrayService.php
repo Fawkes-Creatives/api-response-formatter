@@ -3,7 +3,7 @@
  * @author fawkescreatives created on 16/09/2021
  */
 
-namespace ApiResponse\Formatter\Helpers;
+namespace LaravelIntuition\Helpers;
 
 class ArrayService
 {

@@ -3,12 +3,12 @@
  * @author fawkescreatives created on 15/09/2021
  */
 
-namespace ApiResponse\Formatter\Facades;
+namespace LaravelIntuition\Facades;
 
 use Illuminate\Support\Facades\Facade;
-use ApiResponse\Formatter\Contracts\ResponseContract;
+use LaravelIntuition\Contracts\ResponseContract;
 
-class ApiResponse extends Facade
+class Intuition extends Facade
 {
     protected static function getFacadeAccessor(): string
     {

@@ -3,9 +3,9 @@
  * @author fawkescreatives created on 17/09/2021
  */
 
-namespace ApiResponse\Formatter\Tests;
+namespace LaravelIntuition\Tests;
 
-use ApiResponse\Formatter\ApiResponseServiceProvider;
+use LaravelIntuition\LaravelIntuitionServiceProvider;
 use Orchestra\Testbench\TestCase as OrchestraTestCase;
 
 abstract class TestCase extends OrchestraTestCase
@@ -18,14 +18,14 @@ abstract class TestCase extends OrchestraTestCase
     protected function getPackageProviders($app):array
     {
         return [
-            ApiResponseServiceProvider::class,
+            LaravelIntuitionServiceProvider::class,
         ];
     }
 
     protected function getPackageAliases($app)
     {
         return [
-            'ApiResponse' => 'ApiResponse\Facade',
+            'Intuition' => 'LaravelIntuition\Facade',
         ];
     }
 

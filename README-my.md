@@ -1,4 +1,9 @@
-# APIs Response Formatter
+<h1 align="center">Laravel Intuition</h1>
+
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/fawkescreatives/laravel-intuition.svg)](https://packagist.org/packages/fawkescreatives/laravel-intuition)
+[![Laravel 8.x](https://img.shields.io/badge/Laravel-8.x-red.svg)](http://laravel.com)
+[![Total Downloads](https://poser.pugx.org/fawkescreatives/laravel-intuition/downloads)](https://packagist.org/packages/fawkescreatives/laravel-intuition)
+[![License](https://img.shields.io/github/license/mashape/apistatus.svg)](https://packagist.org/packages/fawkescreatives/laravel-intuition)
 
 APIs response များကို format တစ်ခုတည်းဖြစ်စေရန်ရည်ရွယ်ပြီးတည်ဆောက်သည်။
 
@@ -18,7 +23,7 @@ APIs response များကို format တစ်ခုတည်းဖြစ�
 Composer ကိုသုံးပြီး Install လုပ်ပါ။
 
 ```bash
-composer require fawkescreatives/api-response-formatter
+composer require fawkescreatives/laravel-intuition
 ```
 
 Laravel Package Auto-Discovery မလုပ်လျှင် `config/app.php` file ထဲမှ `providers` ထဲမှာ ဒီလိုသွားထည့်ပါ။
@@ -28,22 +33,21 @@ Laravel Package Auto-Discovery မလုပ်လျှင် `config/app.php` f
  * Package Service Providers...
  */
 
-ApiResponse\Formatter\ApiResponseServiceProvider::class,
+LaravelIntuition\LaravelIntuitionServiceProvider::class,
 ```
 
 ## Configuration
 ```bash
-php artisan vendor:publish --provider="ApiResponse\Formatter\ApiResponseServiceProvider"
+php artisan vendor:publish --provider="LaravelIntuition\LaravelIntuitionServiceProvider"
 ```
 
-
-``config/api_response_format.php`` မှ boolean value များကိုပြင်ဆင်ခြင်းဖြင့် response ကိုပြောင်းလဲနိုင်သည်။
+``config/intuition.php`` မှ boolean value များကိုပြင်ဆင်ခြင်းဖြင့် response ကိုပြောင်းလဲနိုင်သည်။
 
 ``http status code class`` နှင့် ``default response values များကိုမိမိလိုအပ်သလိုပြုလုပ်နိုင်သည်။ 
 
 eg..,
 ```php
-. api_response_format.php
+. intuition.php
 
 return [
     'status'               => true, // boolean
@@ -52,14 +56,14 @@ return [
     
     // default response values
     'data_key_default_type'  => null, // null || array() // data key ရဲ့ default value type အတွက်
-    'http_status_code_class' => ApiResponse\Formatter\Http\HttpStatusCode::class,
+    'http_status_code_class' => LaravelIntuition\Http\HttpStatusCode::class,
     'default_success_status' => [
-        'status'     => ApiResponse\Formatter\Http\HttpStatusCode::SUCCESS,
-        'status_ref' => ApiResponse\Formatter\Http\HttpStatusCode::SUCCESS_REF
+        'status'     => LaravelIntuition\Http\HttpStatusCode::SUCCESS,
+        'status_ref' => LaravelIntuition\Http\HttpStatusCode::SUCCESS_REF
     ],
     'default_error_status'   => [
-        'status'     => ApiResponse\Formatter\Http\HttpStatusCode::BAD_REQUEST,
-        'status_ref' => ApiResponse\Formatter\Http\HttpStatusCode::BAD_REQUEST_REF
+        'status'     => LaravelIntuition\Http\HttpStatusCode::BAD_REQUEST,
+        'status_ref' => LaravelIntuition\Http\HttpStatusCode::BAD_REQUEST_REF
     ]
 ];
 
@@ -71,7 +75,7 @@ return [
 }
 ```
 
-``status code`` များကိုအသုံးပြုရာတွင် ``App\Http\HttpStatusCode`` ဖြင့်အသုံးပြုရန် အကြံပြုသည်။
+``http status code`` များကိုအသုံးပြုရာတွင် ``App\Http\HttpStatusCode`` ဖြင့်အသုံးပြုရန် အကြံပြုသည်။
 
 ```php
 namespace App\Http;
@@ -103,3 +107,15 @@ class HttpStatusCode
     const NOT_FOUND = 404;
 }
 ```
+
+## Testing
+
+You can run the tests with:
+
+```bash
+composer test
+```
+
+### License
+
+The MIT License (MIT). Please see [License File](https://github.com/Fawkes-Creatives/laravel-intuition/blob/main/LICENSE.md) for more information.

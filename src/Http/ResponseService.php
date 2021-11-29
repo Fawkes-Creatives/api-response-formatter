@@ -3,11 +3,11 @@
  * @author fawkescreatives created on 15/09/2021
  */
 
-namespace ApiResponse\Formatter\Http;
+namespace LaravelIntuition\Http;
 
-use ApiResponse\Formatter\Contracts\ResponseContract;
-use ApiResponse\Formatter\Http\Builder\SuccessResponse;
-use ApiResponse\Formatter\Http\Builder\ErrorResponse;
+use LaravelIntuition\Contracts\ResponseContract;
+use LaravelIntuition\Http\Builder\SuccessResponse;
+use LaravelIntuition\Http\Builder\ErrorResponse;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Traits\Macroable;
 

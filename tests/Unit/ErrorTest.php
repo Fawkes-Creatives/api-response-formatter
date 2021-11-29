@@ -3,12 +3,12 @@
  * @author fawkescreatives created on 17/09/2021
  */
 
-namespace ApiResponse\Formatter\Tests\Unit;
+namespace LaravelIntuition\Tests\Unit;
 
-use ApiResponse\Formatter\Facades\ApiResponse;
-use ApiResponse\Formatter\Tests\Helpers\DataTrait;
-use ApiResponse\Formatter\Tests\TestCase;
-use ApiResponse\Formatter\Http\HttpStatusCode;
+use LaravelIntuition\Facades\Intuition;
+use LaravelIntuition\Tests\Helpers\DataTrait;
+use LaravelIntuition\Tests\TestCase;
+use LaravelIntuition\Http\HttpStatusCode;
 
 class ErrorTest extends TestCase
 {
@@ -17,7 +17,7 @@ class ErrorTest extends TestCase
     /** @test */
     public function it_only_call_error()
     {
-        $data = ApiResponse::error()->getData(true);
+        $data = Intuition::error()->getData(true);
 
         $this->assertCount(
             $this->getExpectedCount(),
@@ -28,8 +28,8 @@ class ErrorTest extends TestCase
     /** @test */
     public function its_status_value_is_false_error()
     {
-        config()->set('api_response_format.status', false);
-        $data = ApiResponse::error(null, [
+        config()->set('intuition.status', false);
+        $data = Intuition::error(null, [
             'status' => HttpStatusCode::NOT_FOUND
         ])->getData(true);
         $this->assertCount(
@@ -42,8 +42,8 @@ class ErrorTest extends TestCase
     /** @test */
     public function its_status_value_is_true_error()
     {
-        config()->set('api_response_format.status', true);
-        $data = ApiResponse::error(HttpStatusCode::NOT_FOUND)->getData(true);
+        config()->set('intuition.status', true);
+        $data = Intuition::error(HttpStatusCode::NOT_FOUND)->getData(true);
         $this->assertCount(
             $this->getExpectedCount(),
             $data
@@ -55,8 +55,8 @@ class ErrorTest extends TestCase
     /** @test */
     public function its_success_value_is_false_error()
     {
-        config()->set('api_response_format.success', false);
-        $data = ApiResponse::error()->getData(true);
+        config()->set('intuition.success', false);
+        $data = Intuition::error()->getData(true);
         $this->assertCount(
             $this->getExpectedCount(),
             $data
@@ -67,8 +67,8 @@ class ErrorTest extends TestCase
     /** @test */
     public function its_success_value_is_true_error()
     {
-        config()->set('api_response_format.success', true);
-        $data = ApiResponse::error()->getData(true);
+        config()->set('intuition.success', true);
+        $data = Intuition::error()->getData(true);
         $this->assertCount(
             $this->getExpectedCount(),
             $data
@@ -80,8 +80,8 @@ class ErrorTest extends TestCase
     /** @test */
     public function its_message_value_is_false_error()
     {
-        config()->set('api_response_format.message', false);
-        $data = ApiResponse::error(HttpStatusCode::BAD_REQUEST, 'I am string')->getData(true);
+        config()->set('intuition.message', false);
+        $data = Intuition::error(HttpStatusCode::BAD_REQUEST, 'I am string')->getData(true);
         $this->assertCount(
             $this->getExpectedCount(),
             $data
@@ -92,8 +92,8 @@ class ErrorTest extends TestCase
     /** @test */
     public function its_message_value_is_true_error()
     {
-        config()->set('api_response_format.message', true);
-        $data = ApiResponse::error(HttpStatusCode::BAD_REQUEST, 'I am string')->getData(true);
+        config()->set('intuition.message', true);
+        $data = Intuition::error(HttpStatusCode::BAD_REQUEST, 'I am string')->getData(true);
         $this->assertCount(
             $this->getExpectedCount(),
             $data
@@ -106,7 +106,7 @@ class ErrorTest extends TestCase
     public function it_sending_data_to_it_error()
     {
         $count = 4;
-        $data = ApiResponse::error(
+        $data = Intuition::error(
             HttpStatusCode::BAD_REQUEST,
             'I am string',
             $this->getSingularArrayData(4)

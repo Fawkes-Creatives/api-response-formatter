@@ -3,7 +3,7 @@
  * @author fawkescreatives created on 17/09/2021
  */
 
-namespace ApiResponse\Formatter\Tests\Helpers;
+namespace LaravelIntuition\Tests\Helpers;
 
 use Faker\Factory;
 
@@ -11,7 +11,7 @@ trait DataTrait
 {
     public function getResponseKeys(): array
     {
-        return array_filter(config('api_response_format'), function ($item) {
+        return array_filter(config('intuition'), function ($item) {
             return is_bool($item);
         });
     }

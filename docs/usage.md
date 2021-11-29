@@ -2,11 +2,11 @@
 
 - Option 1: Use Facade
 ```php
-use ApiResponse\Formatter\Facades\ApiResponse;
+use LaravelIntuition\Facades\Intuition;
 
 public function index()
 {
-    return ApiResponse::success();
+    return Intuition::success();
 }
 ```
 
@@ -14,13 +14,13 @@ public function index()
 ```php
 public function index()
 {
-    return api_response()->success();
+    return intuition()->success();
 }
 ```
 
 - Option 3: Use Inject
 ```php
-use ApiResponse\Formatter\Http\ResponseService;
+use LaravelIntuition\Http\ResponseService;
 
 public function index(ResponseService $response)
 {
@@ -32,12 +32,12 @@ public function index(ResponseService $response)
 ``Sample 1: Empty data``
 
 ```php
-use ApiResponse\Formatter\Facades\ApiResponse;
+use LaravelIntuition\Facades\Intuition;
 use App\Http\HttpStatusCode;
 
 public function index()
 {
-    return ApiResponse::success(null, [
+    return Intuition::success(null, [
         'status' => HttpStatusCode::SUCCESS,
         'message' => 'success'
     ]);
@@ -55,7 +55,7 @@ public function index()
 
 ``Sample 2: Use Spatie Laravel Fractal``
 ```php
-use ApiResponse\Formatter\Facades\ApiResponse;
+use LaravelIntuition\Facades\Intuition;
 use App\Transformers\UserTransformer;
 
 public function index()
@@ -63,7 +63,7 @@ public function index()
     $users = User::paginate();
     $users = fractal($users, UserTransformer::class);
     
-    return ApiResponse::success($users);
+    return Intuition::success($users);
 }
 ```
 ```json
@@ -79,7 +79,7 @@ public function index()
 
 ``Sample 3: Use API Resources``
 ```php
-use ApiResponse\Formatter\Facades\ApiResponse;
+use LaravelIntuition\Facades\Intuition;
 use App\Http\Resources\UserCollection;
 
 public function index()
@@ -87,7 +87,7 @@ public function index()
     $users = User::paginate();
     $users = new UserCollection($users);
     
-    return ApiResponse::success($users);
+    return Intuition::success($users);
 }
 ```
 ```json
@@ -105,11 +105,11 @@ public function index()
 ### Error Response
 ``Sample 1: Empty info``
 ```php
-use ApiResponse\Formatter\Facades\ApiResponse;
+use LaravelIntuition\Facades\Intuition;
 
 public function index()
 {
-    return ApiResponse::error();
+    return Intuition::error();
 }
 ```
 ```json
@@ -124,12 +124,12 @@ public function index()
 
 ``Sample 2: With info``
 ```php
-use ApiResponse\Formatter\Facades\ApiResponse;
+use LaravelIntuition\Facades\Intuition;
 use App\Http\HttpStatusCode;
 
 public function index()
 { 
-    return ApiResponse::error(
+    return Intuition::error(
         HttpStatusCode::FORBIDDEN,
         "You don't have permit.",
         [

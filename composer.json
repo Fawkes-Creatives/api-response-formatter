@@ -1,5 +1,5 @@
 {
-    "name": "fawkescreatives/api-response-formatter",
+    "name": "fawkescreatives/laravel-intuition",
     "description": "This package is for building the same format APIs responses in Laravel.",
     "keywords": [
         "laravel",
@@ -7,7 +7,8 @@
         "response",
         "format",
         "api-response-format",
-        "api-response-formatter"
+        "api-response-formatter",
+        "intuition"
     ],
     "license": "MIT",
     "authors": [
@@ -16,9 +17,17 @@
             "email": "fawkescreatives@gmail.com"
         }
     ],
+    "require": {
+        "php": "^7.3|^8.0",
+        "illuminate/support": "^8.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.5",
+        "orchestra/testbench": "^6.21"
+    },
     "autoload": {
         "psr-4": {
-            "ApiResponse\\Formatter\\": "src/"
+            "LaravelIntuition\\": "src/"
         },
         "files": [
             "src/Helpers/helpers.php"
@@ -26,32 +35,21 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "ApiResponse\\Formatter\\Tests\\": "tests/"
+            "LaravelIntuition\\Tests\\": "tests/"
         }
-    },
-    "require": {
-        "php": "^7.1|^8.0",
-        "illuminate/support": "^5.1|^6.0|^7.0|^8.0"
-    },
-    "require-dev": {
-        "phpunit/phpunit": "^9.5",
-        "orchestra/testbench": "^6.21"
     },
     "extra": {
         "laravel": {
             "providers": [
-                "ApiResponse\\Formatter\\ApiResponseServiceProvider"
+                "LaravelIntuitionServiceProvider"
             ],
             "aliases": {
-                "ApiResponse": "ApiResponse\\Formatter\\Facades\\ApiResponse"
+                "ApiResponse": "LaravelIntuition\\Facades\\Intuition"
             }
         }
     },
     "scripts": {
-        "test": "vendor/bin/phpunit tests/ --colors --testdox",
-        "post-autoload-dump": [
-            "@php ./vendor/bin/testbench package:discover --ansi"
-        ]
+        "test": "vendor/bin/phpunit"
     },
     "minimum-stability": "dev",
     "prefer-stable": true

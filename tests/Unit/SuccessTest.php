@@ -3,12 +3,12 @@
  * @author fawkescreatives created on 17/09/2021
  */
 
-namespace ApiResponse\Formatter\Tests\Unit;
+namespace LaravelIntuition\Tests\Unit;
 
-use ApiResponse\Formatter\Facades\ApiResponse;
-use ApiResponse\Formatter\Tests\Helpers\DataTrait;
-use ApiResponse\Formatter\Tests\TestCase;
-use ApiResponse\Formatter\Http\HttpStatusCode;
+use LaravelIntuition\Facades\Intuition;
+use LaravelIntuition\Tests\Helpers\DataTrait;
+use LaravelIntuition\Tests\TestCase;
+use LaravelIntuition\Http\HttpStatusCode;
 
 class SuccessTest extends TestCase
 {
@@ -17,7 +17,7 @@ class SuccessTest extends TestCase
     /** @test */
     public function it_only_call_success()
     {
-        $data = ApiResponse::success()->getData(true);
+        $data = Intuition::success()->getData(true);
 
         $this->assertCount(
             $this->getExpectedCount(),
@@ -28,8 +28,8 @@ class SuccessTest extends TestCase
     /** @test */
     public function its_status_value_is_false_success()
     {
-        config()->set('api_response_format.status', false);
-        $data = ApiResponse::success(null, [
+        config()->set('intuition.status', false);
+        $data = Intuition::success(null, [
             'status' => HttpStatusCode::ACCEPTED
         ])->getData(true);
         $this->assertCount(
@@ -43,8 +43,8 @@ class SuccessTest extends TestCase
     /** @test */
     public function its_status_value_is_true_success()
     {
-        config()->set('api_response_format.status', true);
-        $data = ApiResponse::success(null, [
+        config()->set('intuition.status', true);
+        $data = Intuition::success(null, [
             'status' => HttpStatusCode::NO_CONTENT
         ])->getData(true);
         $this->assertCount(
@@ -58,8 +58,8 @@ class SuccessTest extends TestCase
     /** @test */
     public function its_success_value_is_false_success()
     {
-        config()->set('api_response_format.success', false);
-        $data = ApiResponse::success(null, [
+        config()->set('intuition.success', false);
+        $data = Intuition::success(null, [
             'success' => true
         ])->getData(true);
         $this->assertCount(
@@ -72,8 +72,8 @@ class SuccessTest extends TestCase
     /** @test */
     public function its_success_value_is_true_success()
     {
-        config()->set('api_response_format.success', true);
-        $data = ApiResponse::success(null, [
+        config()->set('intuition.success', true);
+        $data = Intuition::success(null, [
             'success' => false
         ])->getData(true);
         $this->assertCount(
@@ -87,8 +87,8 @@ class SuccessTest extends TestCase
     /** @test */
     public function its_message_value_is_false_success()
     {
-        config()->set('api_response_format.message', false);
-        $data = ApiResponse::success(null, [
+        config()->set('intuition.message', false);
+        $data = Intuition::success(null, [
             'message' => 'I am string'
         ])->getData(true);
         $this->assertCount(
@@ -101,8 +101,8 @@ class SuccessTest extends TestCase
     /** @test */
     public function its_message_value_is_true_success()
     {
-        config()->set('api_response_format.message', true);
-        $data = ApiResponse::success(null, [
+        config()->set('intuition.message', true);
+        $data = Intuition::success(null, [
             'message' => 'I am string'
         ])->getData(true);
         $this->assertCount(
@@ -117,7 +117,7 @@ class SuccessTest extends TestCase
     public function it_sending_data_to_it_success()
     {
         $count = 4;
-        $data = ApiResponse::success(
+        $data = Intuition::success(
             $this->getMultidimensionalArrayData($count)
         )->getData(true);
 

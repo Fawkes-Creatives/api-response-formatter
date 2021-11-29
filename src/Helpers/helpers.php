@@ -1,16 +1,17 @@
 <?php
 
-use ApiResponse\Formatter\Contracts\ResponseContract;
-use ApiResponse\Formatter\Helpers\ArrayService;
+use LaravelIntuition\Contracts\ResponseContract;
+use LaravelIntuition\Helpers\ArrayService;
+use Illuminate\Support\Facades\Config;
 
-if (!function_exists('api_response')) {
+if (!function_exists('intuition')) {
 
     /**
      * A helper method to resolve the api response contract out of the service container.
      *
      * @return ResponseContract
      */
-    function api_response(): ResponseContract
+    function intuition(): ResponseContract
     {
         return app(ResponseContract::class);
     }
@@ -23,7 +24,7 @@ if (!function_exists('getSuccessHttpStatus')) {
      */
     function getSuccessHttpStatus(): array
     {
-        return Config::get('api_response_format.default_success_status');
+        return Config::get('intuition.default_success_status');
     }
 }
 
@@ -34,7 +35,7 @@ if (!function_exists('getErrorHttpStatus')) {
      */
     function getErrorHttpStatus(): array
     {
-        return Config::get('api_response_format.default_error_status');
+        return Config::get('intuition.default_error_status');
     }
 }
 
@@ -93,7 +94,7 @@ if (!function_exists('httpStatusCodeClassName')) {
      */
     function httpStatusCodeClassName(): string
     {
-        return Config::get('api_response_format.http_status_code_class');
+        return Config::get('intuition.http_status_code_class');
     }
 }
 

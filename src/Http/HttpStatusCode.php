@@ -4,7 +4,7 @@
  * @reference https://developer.mozilla.org/en-US/docs/Web/HTTP/Status
  */
 
-namespace ApiResponse\Formatter\Http;
+namespace LaravelIntuition\Http;
 
 class HttpStatusCode
 {

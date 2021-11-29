@@ -3,9 +3,9 @@
  * @author fawkescreatives created on 15/09/2021
  */
 
-namespace ApiResponse\Formatter\Http\Builder;
+namespace LaravelIntuition\Http\Builder;
 
-use ApiResponse\Formatter\Helpers\ArrayService;
+use LaravelIntuition\Helpers\ArrayService;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Contracts\Support\Arrayable;
@@ -63,7 +63,7 @@ abstract class ResponseBuilder
      */
     protected function getEnabledKeys(): array
     {
-        $config = Config::get('api_response_format');
+        $config = Config::get('intuition');
         $output = [];
         foreach ($config as $key => $value) {
             $value = filter_var($value, FILTER_VALIDATE_BOOL);
@@ -84,7 +84,7 @@ abstract class ResponseBuilder
     private function isArrayDefaultDataKeyType(): bool
     {
         return ArrayService::isArray(
-            Config::get('api_response_format.data_key_default_type')
+            Config::get('intuition.data_key_default_type')
         );
     }
 
