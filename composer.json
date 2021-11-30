@@ -41,10 +41,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "LaravelIntuitionServiceProvider"
+                "LaravelIntuition\\LaravelIntuitionServiceProvider"
             ],
             "aliases": {
-                "ApiResponse": "LaravelIntuition\\Facades\\Intuition"
+                "Intuition": "LaravelIntuition\\Facades\\Intuition"
             }
         }
     },
