@@ -39,12 +39,16 @@ class ResponseService implements ResponseContract
      * @param null $data
      * @param mixed ...$parameters
      * @return array|array[]|LengthAwarePaginator[]|null[]
+     * @throws \ReflectionException
      */
-    public function success($data = null, ...$parameters)
+    public function success($data = null, ...$parameters): array
     {
         return $this->successResponse->build($data, ...$parameters);
     }
 
+    /**
+     * @throws \ReflectionException
+     */
     public function error($status = null, $message = null, $data = null)
     {
         return $this->errorResponse->build($data, [

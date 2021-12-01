@@ -7,7 +7,7 @@ namespace LaravelIntuition\Helpers;
 
 class ArrayService
 {
-    public static function isArray($value)
+    public static function isArray($value): bool
     {
         return is_array($value) || $value instanceof \ArrayAccess;
     }
@@ -31,7 +31,7 @@ class ArrayService
      * @param null $default
      * @return mixed|null
      */
-    public static function get($value, string $key = null, $default = null)
+    public static function get(?array $value, string $key = null, $default = null)
     {
         if (!self::isArray($value)) {
             return $value ?: $default;

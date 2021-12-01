@@ -204,7 +204,7 @@ abstract class ResponseBuilder
         ];
     }
 
-    protected function response()
+    protected function response(): \Illuminate\Http\JsonResponse
     {
         return app(ResponseFactory::class)->json(
             array_merge($this->getParameters(), $this->formattedData()),
